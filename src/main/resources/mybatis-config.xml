@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--主键的自增功能开启-->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--设置列的别名-->
+        <setting name="useColumnLabel" value="true"></setting>
+        <!--设置驼峰转换，即从经典的a_coulim转换成Java的数据类型-->
+        <setting name="mapUnderscoreToCamelCase" value="true"></setting>
+    </settings>
+</configuration>
