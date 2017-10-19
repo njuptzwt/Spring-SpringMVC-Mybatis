@@ -35,7 +35,8 @@
         <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
     </bean>
 
-    <!--配置扫描dao接口的包，动态实现dao接口，并将dao接口注入到spring的容器中，这是最主要的，自动实现DAOImpl并注入到sprinng容器管理-->
+    <!--配置扫描dao接口的包，动态实现dao接口，并将dao接口注入到spring的容器中，这是最主要的，自动实现DAOImpl并注入到sprinng容器管理
+    service 的话需要扫描Service的相关包，将Service注入到spring中统一管理-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--如果是注解的Mapper形式需要加上Annotation的注解-->
         <property name="basePackage" value="com.seckill.dao"></property>

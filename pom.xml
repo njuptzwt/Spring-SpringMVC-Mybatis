@@ -85,55 +85,55 @@
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-core</artifactId>
-          <version>4.3.0.RELEASE</version>
+          <version>4.3.12.RELEASE</version>
       </dependency>
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-beans</artifactId>
-          <version>4.3.0.RELEASE</version>
+          <version>4.3.12.RELEASE</version>
       </dependency>
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-aop</artifactId>
-          <version>4.3.0.RELEASE</version>
+          <version>4.3.12.RELEASE</version>
       </dependency>
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-context</artifactId>
-          <version>4.3.0.RELEASE</version>
+          <version>4.3.12.RELEASE</version>
       </dependency>
       <!--SpringDao层的依赖,事务管理和JDBC-->
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-jdbc</artifactId>
-          <version>4.1.7.release</version>
+          <version>4.3.1.RELEASE</version>
       </dependency>
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-tx</artifactId>
-          <version>4.1.7.release</version>
+          <version>4.3.12.RELEASE</version>
       </dependency>
       <!--springWEB相关的依赖-->
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-web</artifactId>
-          <version>4.3.0.RELEASE</version>
+          <version>4.3.12.RELEASE</version>
       </dependency>
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-webmvc</artifactId>
-          <version>4.3.0.RELEASE</version>
+          <version>4.3.12.RELEASE</version>
       </dependency>
       <!--Spring 单元测试相关的依赖-->
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-test</artifactId>
-          <version>4.3.9.RELEASE</version>
+          <version>4.3.12.RELEASE</version>
       </dependency>
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-test</artifactId>
-          <version>4.3.9.RELEASE</version>
+          <version>4.3.12.RELEASE</version>
           <scope>test</scope>
       </dependency>
   </dependencies>
