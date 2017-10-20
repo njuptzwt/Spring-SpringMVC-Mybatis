@@ -71,10 +71,10 @@ public class SeckillController {
      * SeckillResult是封装的新类型，用于和前端页面交换数据使用的JSON数据格式
      *点击列表页的链接的时候，执行的操作，显示秒杀地址（根据时间判断，没有达到时间，倒计时，到达时间，给出秒地址，超出时间，显示超出时间信息
      * DTO对象在业务逻辑中扮演了很重要的角色
-     * 除了返回JSP格式,后台还可以像浏览器传递JSON数据格式和XML数据
+     * 除了返回JSP格式,后台还可以像浏览器传递JSON数据格式和XML数据,添加produces告诉浏览器可以使用json的数据格式，utf-8中文乱码解决
      * 使用注解的方式
      */
-    @RequestMapping(value = "/{seckillid}/exposer", method = RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/{seckillid}/exposer", method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public SeckillResult<Exposer> exposer(@PathVariable("seckillid") Long Seckillid)
     {
@@ -94,17 +94,17 @@ public class SeckillController {
     /**
      * 执行秒杀操作的核心层，返回的是ExecutionResult,JSON数据格式和前端交互
      */
-    @RequestMapping(value = "/{seckillid}/{md5}/execution",method = RequestMethod.POST)
+    @RequestMapping(value = "/{seckillid}/{md5}/execution",method = RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public SeckillResult<SeckillExecution> execution(@PathVariable("seckillid") long seckillid, @PathVariable("md5") String md5,
-                                                     @CookieValue(value = "userphone",required = false)Long userphone)//Cookie值从request获取用户号码
+                                                     @CookieValue(value = "killPhone",required = false)Long userphone)//Cookie值从request获取用户号码
     {
         /**
          * 使用cookie默认为false当传递数据的时候由后台进行检查
          */
         if(userphone==null)
         {
-            return new SeckillResult<SeckillExecution>(false,"用户没有注册");
+            return new SeckillResult<SeckillExecution>(false,"用户没有注册");//请求不成功
         }
         /**
          * 业务处理的过程，返回结果给前端，异常或者正确结果，使用JSON数据的好处，大大减小了传递的数据量
@@ -118,24 +118,25 @@ public class SeckillController {
             //返回秒杀已经关闭的异常，相当于是做判断，哪个错了
             logger.error("error message:" + e1.getMessage());
             SeckillExecution seckillExecution=new SeckillExecution(seckillid, SeckillStatEnum.End);//秒杀关闭
-            return new SeckillResult<SeckillExecution>(false,seckillExecution);//返回秒杀的执行结果(统一的DTO传输数据,JSON数据格式)
+            return new SeckillResult<SeckillExecution>(true,seckillExecution);//返回秒杀的执行结果(统一的DTO传输数据,JSON数据格式)
         }catch (RepeateKillException e2)
         {
             logger.error("error message:" + e2.getMessage());
             SeckillExecution seckillExecution=new SeckillExecution(seckillid, SeckillStatEnum.Repeate);//重复秒杀
-            return new SeckillResult<SeckillExecution>(false,seckillExecution);//返回秒杀的执行结果(统一的DTO传输数据,JSON数据格式)
+            return new SeckillResult<SeckillExecution>(true,seckillExecution);//返回秒杀的执行结果(统一的DTO传输数据,JSON数据格式)
         }
         catch(SeckillException e3)
         {
             logger.error("error message:" + e3.getMessage());
             SeckillExecution seckillExecution=new SeckillExecution(seckillid, SeckillStatEnum.InnerError);//内部错误
-            return new SeckillResult<SeckillExecution>(false,seckillExecution);//返回秒杀的执行结果(统一的DTO传输数据,JSON数据格式)
+            return new SeckillResult<SeckillExecution>(true,seckillExecution);//返回秒杀的执行结果(统一的DTO传输数据,JSON数据格式)
         }
     }
     /**
      * 获取系统时间的函数
      */
     @RequestMapping(value = "/time/now",method = RequestMethod.GET)
+    @ResponseBody
     public SeckillResult<Long> time(){
         Date now=new Date();
       return new SeckillResult(true,now.getTime());//值得注意的是web层的接口返回的数据都用同一种类型来处理DTO数据！！！然后使用JSON格式和前端通信！！

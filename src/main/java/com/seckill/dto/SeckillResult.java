@@ -5,7 +5,7 @@ package com.seckill.dto;
  * Created by 18362 on 2017/10/18.
  */
 public class SeckillResult<T> {
-    private Boolean success;
+    private Boolean success;//请求是否成功
 
     private T data;
 

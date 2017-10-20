@@ -5,6 +5,19 @@
          version="3.0"
          metadata-complete="true">
     <!--用maven创建的web-app需要修改servlet的版本为3.1-->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+        
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.htm</url-pattern>
+    </servlet-mapping>
     <!--配置DispatcherServlet-->
     <servlet>
         <servlet-name>seckill-dispatcher</servlet-name>

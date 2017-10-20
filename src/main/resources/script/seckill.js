@@ -48,7 +48,7 @@ var seckill = {
                     //绑定一次点击事件
                     $('#killBtn').one('click', function () {
                         //执行秒杀请求
-                        //1.先禁用按钮
+                        //1.先禁用按钮,防止多次执行按钮操作，给服务器太大的压力
                         $(this).addClass('disabled');
                         //2.发送请求
                         $.post(killUrl, {}, function (result) {
