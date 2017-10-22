@@ -43,8 +43,9 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 
-    <!--注入redis的dao对象-->
-    <bean>
-        
+    <!--注入redis的dao对象,使用的是构造函数的依赖注入方式，Spring的Bean对象的创建-->
+    <bean id="redisDao" class="com.seckill.dao.cache.RedisDao">
+        <constructor-arg index="0" value="127.0.0.1"></constructor-arg>
+        <constructor-arg index="1" value="6379"></constructor-arg>
     </bean>
 </beans>
