@@ -66,8 +66,15 @@ public class SeckillServiceImpl implements  SeckilllService{
         return md5;
     }
 
+    /**
+     * 获取每一个商品的暴露接口地址，没有到达时间，到达时间，超过时间，返回的结果
+     * 通过缓存机制将每一次查询的数据库对象放到Cache中，这样当用户每一次刷新页面的时候
+     * 不必访问数据库，而是访问缓存！提高数据库的性能~。Nosql的机制
+     * @param seckillid
+     * @return
+     */
     public Exposer exportSeckillUrl(long seckillid) {
-        Seckill seckill=seckillDao.queryById(seckillid);
+        Seckill seckill=seckillDao.queryById(seckillid);//缓存操作的对象
         if(seckill==null)
             return new Exposer(false,seckillid);
         Date starttime=seckill.getStarttime();

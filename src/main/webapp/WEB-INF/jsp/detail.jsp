@@ -5,7 +5,7 @@
 <html>
 <head>
     <!--静态包含公共页面，实现的效果是可以把包含的整个页面的内容加载到该页面的jsp代码中-->
-    <!--动态包含是指多个Servlet的最终运行结果饭囊在一起-->
+    <!--动态包含是指多个Servlet的最终运行结果放在一起-->
     <title>秒杀产品的详情页</title>
     <%@include file="common/head.jsp"%>
 </head>
@@ -68,10 +68,12 @@
 <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <%--jQuery countDown倒计时插件--%>
 <script src="http://cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.min.js"></script>
-
+<!--引入前端交互的数据js-->
+<!--引入js文件有问题,直接引入js代码没问题-->
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/seckill.js"></script>
 
 <script type="text/javascript">
-    //javaScript的触发函数，加载的时候自动加载函数,EL表达式
+    //javaScript的触发函数，页面加载的时候自动加载函数,EL表达式
     $(function () {
         //使用EL表达式传入参数
         seckill.detail.init({
@@ -83,21 +85,20 @@
 </script>
 
 <script type="text/javascript">
-
     //存放主要交互逻辑的js代码
-    // javascript 模块化(package.类.方法)
+    // javascript 模块化(package.类.方法)这边只有seckill一个模块，针对该模块的操作封装在类似模块/包/类/方法/等思想
     var seckill = {
         //封装秒杀相关ajax的url
         URL: {
             //
             now: function () {
-                return  "/seckill/time/now";
+                return "/seckill/time/now";
             },
             exposer: function (seckillId) {
                 return '/seckill/' + seckillId + '/exposer';
             },
             execution: function (seckillId, md5) {
-                return  '/seckill/' + seckillId + '/' + md5 + '/execution';
+                return '/seckill/' + seckillId + '/' + md5 + '/execution';
             }
         },
 
@@ -105,7 +106,7 @@
         handlerSeckill: function (seckillId, node) {
             node.hide().html('<button class="btn btn-primary btn-lg" id="killBtn">开始秒杀</button>');
             $.get(seckill.URL.exposer(seckillId), {}, function (result) {
-                console.log("---exposer:"+seckill.URL.exposer(seckillId));
+                console.log("---exposer:" + seckill.URL.exposer(seckillId));
                 //在回调函数中，执行交互流程
                 if (result && result['success']) {
                     var exposer = result['data'];
