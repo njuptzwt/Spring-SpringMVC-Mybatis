@@ -42,4 +42,9 @@
         <property name="basePackage" value="com.seckill.dao"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
+
+    <!--注入redis的dao对象-->
+    <bean>
+        
+    </bean>
 </beans>

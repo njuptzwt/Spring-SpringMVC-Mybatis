@@ -145,6 +145,20 @@
           <type>jar</type>
           <scope>compile</scope>
       </dependency>
+
+      <!--自定义的序列化操作protostuff-->
+      <!-- https://mvnrepository.com/artifact/com.dyuproject.protostuff/protostuff-runtime -->
+      <dependency>
+          <groupId>com.dyuproject.protostuff</groupId>
+          <artifactId>protostuff-runtime</artifactId>
+          <version>1.0.8</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.dyuproject.protostuff/protostuff-core -->
+      <dependency>
+          <groupId>com.dyuproject.protostuff</groupId>
+          <artifactId>protostuff-core</artifactId>
+          <version>1.0.8</version>
+      </dependency>
   </dependencies>
   <build>
     <finalName>SpringMVC</finalName>
