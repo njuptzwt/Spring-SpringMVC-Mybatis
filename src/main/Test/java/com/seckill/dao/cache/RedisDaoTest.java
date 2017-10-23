@@ -25,7 +25,7 @@ public class RedisDaoTest {
     private RedisDao redisDao;//依赖注入
     @Autowired
     private SeckillDao seckillDao;
-    Long id = 1001L;
+    Long id = 1002L;
 
     @Test
     public void getSeckill() throws Exception {

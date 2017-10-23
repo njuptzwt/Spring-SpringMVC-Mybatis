@@ -2,6 +2,7 @@ package com.seckill.service;
 
 import com.seckill.dao.SeckillDao;
 import com.seckill.dao.SuccesskilledDao;
+import com.seckill.dao.cache.RedisDao;
 import com.seckill.dto.Exposer;
 import com.seckill.dto.SeckillExecution;
 import com.seckill.entity.Seckill;
@@ -37,6 +38,8 @@ public class SeckillServiceImpl implements  SeckilllService{
      */
     @Autowired
     private SuccesskilledDao successkilledDao;
+    @Autowired
+    private RedisDao redisDao;//缓存的redis操作的数据库对象
 
     /**
      * 加入混淆的概念，引入随机的盐值
@@ -74,9 +77,18 @@ public class SeckillServiceImpl implements  SeckilllService{
      * @return
      */
     public Exposer exportSeckillUrl(long seckillid) {
-        Seckill seckill=seckillDao.queryById(seckillid);//缓存操作的对象
-        if(seckill==null)
-            return new Exposer(false,seckillid);
+        /**
+         * 优化点，访问缓存优化
+         */
+        Seckill seckill= redisDao.getSeckill(seckillid);//看缓存中是否有数据
+        if(seckill==null) {
+            //如果缓存中没有数据，从数据库中获取，并写入缓存中
+            seckill = seckillDao.queryById(seckillid);//缓存操作的对象
+            if (seckill == null)
+                return new Exposer(false, seckillid);
+            else
+                redisDao.putSeckill(seckill);//如果数据库中有对象，写入对象
+        }
         Date starttime=seckill.getStarttime();
         Date endtime=seckill.getEndtime();
         Date nowtime=new Date();//系统当前时间

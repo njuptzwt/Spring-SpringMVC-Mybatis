@@ -37,8 +37,8 @@ public class RedisDao {
          * 缓存操作的逻辑，相当于是一个数据库的链接过程
          */
         try {
-            jedis=new Jedis("localhost" ,6379);
-            //Jedis jedis=jedisPool.getResource();//jedis相当于是connection,jedisPool相当于是数据库的连接池
+            //jedis=new Jedis("192.168.44.135" ,6379);
+            Jedis jedis=jedisPool.getResource();//jedis相当于是connection,jedisPool相当于是数据库的连接池
             try {
                     String key="seckill:"+seckillid;//存储的键值
                 /**
@@ -75,8 +75,8 @@ public class RedisDao {
     {
         //手动序列化的过程
         try {
-            jedis=new Jedis("localhost" ,6379);
-            //Jedis jedis=jedisPool.getResource();
+            // jedis=new Jedis("192.168.44.135" ,6379);
+            Jedis jedis=jedisPool.getResource();//连接池创建
             try {
                 String key="seckill:"+seckill.getSeckillid();
                 //调用Utils的方法序列化对象
